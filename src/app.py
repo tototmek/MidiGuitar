@@ -51,7 +51,8 @@ def loop():
     unzipped_peaks = list(zip(*peaks))
     if unzipped_peaks:
         plt.scatter(unzipped_peaks[0], unzipped_peaks[1])
-    plt.scatter([0], [note_detector._data["notes"][0]["amplitude"]])
+    for note in note_detector._data["notes"]:
+        plt.scatter([note["frequency"]], [note["amplitude"]])
     plt.ylim(0, 30)
     plt.pause(0.1)
 

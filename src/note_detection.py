@@ -75,6 +75,8 @@ class NoteDetector:
             note = self.frequency_to_note(frequency)
             peak_note_names.append(note["name"])
             note["amplitude"] = i1 * amplitude  + i2 * note["amplitude"]
+            break # this line breaks polyphony
+    
         
         for note in self._data["notes"]:
             # Set non-peak amplitudes to zero (with LP)

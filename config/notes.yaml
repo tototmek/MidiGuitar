@@ -1,8 +1,9 @@
 name: "Yamaha-Pacifica"
-note_averaging_coefficient: 0.12
+note_averaging_coefficient: 0.1
 default:
   on_threshold:  4
   off_threshold: 1
+# TODO: tune note thresholds!
 notes:
   - name: "E2"
     frequency: 82.41
@@ -10,3 +11,63 @@ notes:
     frequency: 87.31
   - name: "F#2"
     frequency: 92.50
+  - name: "G2"
+    frequency: 98.00
+  - name: "G#2"
+    frequency: 103.83
+  - name: "A2"
+    frequency: 110.00
+  - name: "A#2"
+    frequency: 116.54
+  - name: "H2"
+    frequency: 123.47
+  - name: "C3"
+    frequency: 130.81
+  - name: "C#3"
+    frequency: 138.59
+  - name: "D3"
+    frequency: 146.83
+  - name: "D#3"
+    frequency: 155.56
+  - name: "E3"
+    frequency: 164.81
+  - name: "F3"
+    frequency: 174.61
+  - name: "F#3"
+    frequency: 185.00
+  - name: "G3"
+    frequency: 196.00
+  - name: "G#3"
+    frequency: 207.65
+  - name: "A3"
+    frequency: 220.00
+  - name: "A#3"
+    frequency: 233.08
+  - name: "H3"
+    frequency: 246.94
+  - name: "C4"
+    frequency: 261.63
+  - name: "C#4"
+    frequency: 277.18
+  - name: "D4"
+    frequency: 293.66
+  - name: "D#4"
+    frequency: 311.13
+  - name: "E4"
+    frequency: 329.63
+  - name: "F4"
+    frequency: 349.23
+  - name: "F#4"
+    frequency: 369.99
+  - name: "G4"
+    frequency: 392.00
+  - name: "G#4"
+    frequency: 415.30
+  - name: "A4"
+    frequency: 440
+  - name: "A#4"
+    frequency: 466.16
+  - name: "H4"
+    frequency: 493.88
+  - name: "C5"
+    frequency: 523.25
