@@ -1,1 +1,0 @@
-# based on current freq peaks and past information, it outputs note start and stop events. 
