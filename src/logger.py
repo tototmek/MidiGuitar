@@ -19,7 +19,7 @@ def log_info(message):
     print(message)
 
 def log_debug(message):
-    _log(_logcolors.OKBLUE, message)
+    _log(_logcolors.OKCYAN, message)
 
 def log_warn(message):
     _log(_logcolors.WARNING, message)

@@ -1,14 +1,12 @@
 name: "Yamaha-Pacifica"
+note_averaging_coefficient: 0.12
+default:
+  on_threshold:  4
+  off_threshold: 1
 notes:
   - name: "E2"
     frequency: 82.41
-    on_threshold: 5
-    off_threshold: 2
   - name: "F2"
     frequency: 87.31
-    on_threshold: 5
-    off_threshold: 2
   - name: "F#2"
     frequency: 92.50
-    on_threshold: 5
-    off_threshold: 2
