@@ -15,10 +15,10 @@ in_port = client.inports.register("audio_in")
 blocksize = client.blocksize
 
 # These are to play with.
-freq_divisor = 32
-buff_multiplier = 32
+freq_divisor = 8
+buff_multiplier = 8
 
-can_process = False
+pitch_buffer = np.array([0 for _ in range(100)])
 
 batch_size = blocksize / freq_divisor
 signal_length = int(blocksize * buff_multiplier / freq_divisor)
@@ -26,8 +26,8 @@ signal = np.ndarray(signal_length)
 signal_samplerate = client.samplerate / freq_divisor
 print("Signal length:\t\t", signal_length)
 print("Signal samplerate:\t", signal_samplerate)
+print("Latency:\t\t%.2f" % (1000 * signal_length / signal_samplerate), "ms")
 
-note_detector = note_detection.NoteDetector("/home/tototmek/Projects/MidiGuitar/config/notes.yaml")
 
 @client.set_process_callback
 def process(frames):
@@ -35,25 +35,15 @@ def process(frames):
     for i in range(buff_multiplier-1):
         signal[int(i*batch_size):int(i*batch_size+batch_size)] = signal[int((i+1)*batch_size):int((i+1)*batch_size+batch_size)]
     signal[int(-1-batch_size):-1] = data
-    if (can_process):
-        xf, yf = signal_processing.fft(signal[0:-1], signal_length-1, 1 / signal_samplerate)
-        peaks = signal_processing.get_peaks(xf, yf, 2)
-        notes = note_detector.get_notes_from_peaks(peaks)
-        if notes:
-            print(notes)
 
 def loop():
-    xf, yf = signal_processing.fft(signal[0:-1], signal_length-1, 1 / signal_samplerate)
-    peaks = signal_processing.get_peaks(xf, yf, 2)
-    plt.subplot(2, 1, 1)
+    global pitch_buffer
     plt.clf()
-    plt.plot(xf, yf)
-    unzipped_peaks = list(zip(*peaks))
-    if unzipped_peaks:
-        plt.scatter(unzipped_peaks[0], unzipped_peaks[1])
-    for note in note_detector._data["notes"]:
-        plt.scatter([note["frequency"]], [note["amplitude"]])
-    plt.ylim(0, 30)
+    pitch = note_detection.detect_pitch(signal, signal_samplerate, (20, 2000))
+    print(pitch)
+    pitch_buffer = np.roll(pitch_buffer, -1)
+    pitch_buffer[-1] = pitch
+    plt.plot(pitch_buffer)
     plt.pause(0.1)
 
 with client:
